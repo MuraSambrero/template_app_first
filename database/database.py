@@ -1,13 +1,14 @@
 from pymongo import MongoClient
-from fake_db import fake_db
+from config import Config
 
-client = MongoClient('mongodb://localhost:27017/')
+print(Config.uri)
+client = MongoClient(Config.uri)
 
 def append_template_in_mongodb(client, *args, **kwargs):  # для добавления fake_db в MongoDB
-    db = client['templates_db']
-    collection = db['templates']
+    db = client[Config.mongo_init_db_name]
+    collection = db[Config.collection_name]
     template = dict(*args, **kwargs)
     collection.insert_one(template)
 
-for elem in fake_db: # Для добавления fake_db в бд MongoDB
-    append_template_in_mongodb(client, elem)
+# for elem in fake_db: # Для добавления fake_db в бд MongoDB
+#     append_template_in_mongodb(client, elem)
