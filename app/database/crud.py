@@ -28,6 +28,3 @@ def get_templates(client) -> list[dict]:
         for template in collection.find()
     ]
     return templates
-
-# for elem in fake_db: # Для добавления fake_db в бд MongoDB
-#     append_template(client, elem)
